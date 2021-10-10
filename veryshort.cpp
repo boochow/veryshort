@@ -8,7 +8,7 @@
 #include "userdelfx.h"
 #include "delayline.hpp"
 
-#define BUF_LEN 257
+#define BUF_LEN 256
 #define BUF_OFFSET 22
 #define MAX_DEPTH 0.99f
 
