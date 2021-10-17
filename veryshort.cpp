@@ -12,7 +12,7 @@
 #define BUF_LEN 2401
 #define MAX_DELAY 2400
 #define MIN_DELAY 24
-#define MAX_DEPTH 0.95f
+#define MAX_DEPTH 0.98f
 
 static dsp::DelayLine s_delay_r;
 static __sdram float s_delay_ram_r[BUF_LEN];
