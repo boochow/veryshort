@@ -91,9 +91,11 @@ TOPT = -mthumb -mno-thumb-interwork -DTHUMB_NO_INTERWORKING -DTHUMB_PRESENT
 # set targets and directories
 # #############################################################################
 
+PFNAME = prlg
 PKGDIR = $(PROJECT)
-PKGARCH = $(PROJECT).prlgunit
+PKGARCH = $(PROJECT).$(PFNAME)unit
 MANIFEST = manifest.json
+PFMANIFEST = manifest.$(PFNAME).json
 PAYLOAD = payload.bin
 BUILDDIR = $(PROJECTDIR)/build
 OBJDIR = $(BUILDDIR)/obj
@@ -226,7 +228,7 @@ clean:
 package:
 	@echo Packaging to ./$(PKGARCH)
 	@mkdir -p $(PKGDIR)
-	@cp -a $(MANIFEST) $(PKGDIR)/
+	@cp -a $(PFMANIFEST) $(PKGDIR)/$(MANIFEST)
 	@cp -a $(BUILDDIR)/$(PROJECT).bin $(PKGDIR)/$(PAYLOAD)
 	@$(ZIP) $(ZIP_ARGS) $(PROJECT).zip $(PKGDIR)
 	@mv $(PROJECT).zip $(PKGARCH)
