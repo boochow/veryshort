@@ -1,7 +1,7 @@
 /*
     BSD 3-Clause License
 
-    Copyright (c) 2018, KORG INC.
+    Copyright (c) 2023, KORG INC.
     All rights reserved.
 
     Redistribution and use in source and binary forms, with or without
@@ -32,20 +32,42 @@
 //*/
 
 /*
- *  File: userdelfx.ld 
- * 
- *  Linker Script for user delay effects
+ *  File: header.c
+ *
+ *  NTS-1 mkII delay effect unit header definition
+ *
  */
 
-/* Entry Point */
-ENTRY(_entry) 
+#include "unit_delfx.h"   // Note: Include base definitions for delfx units
 
-/* Specify the memory areas */
-MEMORY
-{
-  SRAM   (rx) : org = 0x20019000, len = 12K
-  SDRAM  (rw) : org = 0xC0420000, len = 2432K
-}
+// ---- Unit header definition  --------------------------------------------------------------------
 
-/* Include Rules */
-INCLUDE rules.ld
+const __unit_header unit_header_t unit_header = {
+    .header_size = sizeof(unit_header_t),
+    .target = UNIT_TARGET_PLATFORM | k_unit_module_delfx,
+    .api = UNIT_API_VERSION,
+    .dev_id = 0x42636877U,  // "Bchw"
+    .unit_id = 0x02020000,  // Product number(02),Unit type(02=Delay),reserved
+    .version = 0x00010000U,
+    .name = "Very Short",
+    .num_params = 2,
+  
+  .params = {
+    // Format: min, max, center, default, type, frac. bits, frac. mode, <reserved>, name
+    // Fixed/direct UI parameters
+    // A knob
+    {0, 1023, 0, 256, k_unit_param_type_none, 1, 0, 0, {"TIME"}},
+    
+    // B knob
+    {0, 1023, 0, 256, k_unit_param_type_none, 1, 0, 0, {"DPTH"}},
+    
+    {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+    {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+    {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+    {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+    {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+    {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+    {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+    {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+    {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}}},
+};
