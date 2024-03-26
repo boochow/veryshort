@@ -48,8 +48,6 @@ inline float *sdram_alloc_f32(size_t bufsize) {
     return m;
 }
 
-//void DELFX_INIT(uint32_t platform, uint32_t api)
-//{
 __unit_callback int8_t unit_init(const unit_runtime_desc_t * desc) {
     if (!desc)
         return k_unit_err_undef;
@@ -72,24 +70,8 @@ __unit_callback int8_t unit_init(const unit_runtime_desc_t * desc) {
     if (!desc->hooks.sdram_alloc)
         return k_unit_err_memory;
 
-/*
-    float *m = (float *)desc->hooks.sdram_alloc(BUF_LEN * sizeof(float));
-    if (!m)
-        return k_unit_err_memory;
-
-    buf_clr_f32(m, BUF_LEN);
-
-*/
     s_delay_ram_r = sdram_alloc_f32(BUF_LEN);
     s_delay_r.setMemory(s_delay_ram_r, BUF_LEN);
-/*
-    m = (float *)desc->hooks.sdram_alloc(BUF_LEN * sizeof(float));
-    if (!m)
-        return k_unit_err_memory;
-
-    buf_clr_f32(m, BUF_LEN);
-
-*/
     s_delay_ram_l = sdram_alloc_f32(BUF_LEN);
     s_delay_l.setMemory(s_delay_ram_l, BUF_LEN);
     
@@ -101,11 +83,8 @@ __unit_callback int8_t unit_init(const unit_runtime_desc_t * desc) {
     return k_unit_err_none;
 }
 
-//void DELFX_PROCESS(float *main_xn, 
-//                   uint32_t frames)
 __unit_callback void unit_render(const float * in, float * out, uint32_t frames)
 {
-//    float * __restrict my = main_xn;
     const float * __restrict in_p = in;
     float * __restrict my = out;
     const float * my_e = my + 2 * frames;
@@ -126,7 +105,6 @@ __unit_callback void unit_render(const float * in, float * out, uint32_t frames)
         dry = *in_p++;
         r = s_depth * s_delay_r.readFrac(len_z);
         s_delay_r.write(dry + r);
-//        *(my++) = dry + r;
         *(my++) = (s_mix < 0 ? dry : dry * (1 - s_mix)) + \
             (s_mix > 0 ? r : r * (1 + s_mix));
     }
@@ -134,10 +112,7 @@ __unit_callback void unit_render(const float * in, float * out, uint32_t frames)
 }
 
 
-// void DELFX_PARAM(uint8_t index, int32_t value)
-//{
 __unit_callback void unit_set_param_value(uint8_t id, int32_t value) {
-//    const float valf = q31_to_f32(value);
     float valf;
     switch (id) {
     case TIME:
