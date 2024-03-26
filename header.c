@@ -50,7 +50,7 @@ const __unit_header unit_header_t unit_header = {
     .unit_id = 0x02020000,  // Product number(02),Unit type(02=Delay),reserved
     .version = 0x00010000U,
     .name = "Very Short",
-    .num_params = 2,
+    .num_params = 3,
   
   .params = {
     // Format: min, max, center, default, type, frac. bits, frac. mode, <reserved>, name
@@ -61,7 +61,9 @@ const __unit_header unit_header_t unit_header = {
     // B knob
     {0, 1023, 0, 256, k_unit_param_type_none, 1, 0, 0, {"DPTH"}},
     
-    {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
+    // DELAY switch + B knob
+    {-100, 100, 0, 0, k_unit_param_type_drywet, 0, 0, 0, {"MIX"}},
+
     {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
     {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},
     {0, 0, 0, 0, k_unit_param_type_none, 0, 0, 0, {""}},

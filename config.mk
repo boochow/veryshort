@@ -2,7 +2,7 @@
 # Configuration for Makefile
 #
 
-PROJECT := dummy_delfx
+PROJECT := veryshort
 PROJECT_TYPE := delfx
 
 ##############################################################################
