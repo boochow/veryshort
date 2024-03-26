@@ -3,6 +3,6 @@
 
 This type of delay works as "comb filter", which adds some metallic noise to the input source.
 
-Runs on prologue, minilogue xd, NTS-1 and drumlogue. (The source code for drumlogue is on [a separate branch](https://github.com/boochow/veryshort/tree/drumlogue).)
+Runs on prologue, minilogue xd, NTS-1, NTS1 mkII, and drumlogue. (The source code for [drumlogue](https://github.com/boochow/veryshort/tree/drumlogue) and [NTS-1 mkII](https://github.com/boochow/veryshort/tree/nts1mkii) are on separate branches.)
 
 Download binaries from [this page](https://github.com/boochow/veryshort/releases).
